@@ -22,47 +22,38 @@
     </style>
 </head>
 <body>
-    <button id="btn-show-data">Btn i love uuuuu</button>
-
-    <div>
-        <img src="https://i.stack.imgur.com/ATB3o.gif" id="img-loading">
-    </div>
-
-    <table id="product-table" width="500px">
-    </table>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<table id="product-table" width="500px">
+    <tr>
+        <th style="text-align: left;">ID</th>
+        <th style="text-align: left;">Name</th>
+        <th style="text-align: left;">Price</th>
+    </tr>
+    <!--  html append   -->
+</table>
 
-    <script>
-        $(document).ready(function (){
-            $('#product-table').hide();
-            $('#img-loading').hide();
 
-            $('#btn-show-data').click(function (){
-                $('#product-table').hide();
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-                $('#img-loading').show();
-
-                $.ajax({
-                    url: 'https://6214fc29cdb9d09717a8e710.mockapi.io/api/test/products',
-                    method: 'GET',
-                    success: function (data) {
-                        $('#product-table').show();
-                        $('#img-loading').hide();
-                        let html_append = '<tr> <th style="text-align: left;">ID</th> <th style="text-align: left;">Name</th> <th style="text-align: left;">Price</th> </tr>';
-                        data.forEach(function (item, index){
-                            html_append += `<tr>`;
-                            html_append += `<td>${item.id}</td>`;
-                            html_append += `<td>${item.name}</td>`;
-                            html_append += `<td>${item.price}</td>`;
-                            html_append += `</tr>`;
-                        });
-                        $('#product-table').html(html_append);
-                    }
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: 'https://6214fc29cdb9d09717a8e710.mockapi.io/api/test/products',
+            method: 'GET',
+            success: function (data) {
+                let html_append = '';
+                data.forEach(function (item, index) {
+                    html_append += `<tr>`;
+                    html_append += `<td>${item.id}</td>`;
+                    html_append += `<td>${item.name}</td>`;
+                    html_append += `<td>${item.price * 4325345}</td>`;
+                    html_append += `</tr>`;
                 });
-            });
+                $('#product-table').append(html_append);
+            }
         });
-    </script>
+    });
+</script>
 </body>
 </html>
