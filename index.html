@@ -89,10 +89,10 @@
                         let html_append = '<tr> <th style="text-align: left;">ID</th> <th style="text-align: left;">Name</th> <th style="text-align: left;">Price</th><th style="text-align: left;">Action</th> </tr>';
                         data.forEach(function (item, index){
                             html_append += `<tr>`;
-                            html_append += `<td>${item.id}</td>`;
-                            html_append += `<td>${item.name}</td>`;
-                            html_append += `<td>${item.price}</td>`;
-                            html_append += `<td class="p-2"><button data-id="${item.id}" class="btn-delete btn btn-danger mr-2">Delete</button>`;
+                            html_append += `<td nowrap>${item.id}</td>`;
+                            html_append += `<td nowrap>${item.name}</td>`;
+                            html_append += `<td nowrap>${item.price}</td>`;
+                            html_append += `<td nowrap class="p-2"><button data-id="${item.id}" class="btn-delete btn btn-danger mr-2">Delete</button>`;
                             html_append += `<button type="button" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}" class="btn btn-primary btn-edit-data" data-toggle="modal" data-target="#model-product-edit">Edit</button>`;
                             html_append += `</td></tr>`;
                         });
