@@ -85,6 +85,8 @@
                         price: $('#price').val()
                     },
                     success: function () {
+                        $('#name').val('');
+                        $('#price').val('');
                         $('#btn-show-data').click();
                     }
                 });
