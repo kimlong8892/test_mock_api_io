@@ -51,7 +51,6 @@
             var url_api = 'https://6214fc29cdb9d09717a8e710.mockapi.io/api/test/';
             $('#product-table').hide();
             $('#img-loading').hide();
-            $('#btn-show-data').click();
 
             $('body').on('click', '#btn-show-data', function (){
                 $('#product-table').hide();
@@ -69,12 +68,15 @@
                             html_append += `<td>${item.id}</td>`;
                             html_append += `<td>${item.name}</td>`;
                             html_append += `<td>${item.price}</td>`;
+                            html_append += `<td><button data-id="${item.id}" class="btn-delete">Delete</button></td>`;
                             html_append += `</tr>`;
                         });
                         $('#product-table').html(html_append);
                     }
                 });
             });
+            $('#btn-show-data').click();
+
 
             $('body').on('click', '#btn-add-data', function (){
                 $.ajax({
@@ -87,6 +89,18 @@
                     success: function () {
                         $('#name').val('');
                         $('#price').val('');
+                        $('#btn-show-data').click();
+                    }
+                });
+            });
+
+            $('body').on('click', '.btn-delete', function (){
+                let id = $(this).attr('data-id');
+
+                $.ajax({
+                    url: url_api + '/products/' + id,
+                    method: 'DELETE',
+                    success: function () {
                         $('#btn-show-data').click();
                     }
                 });
