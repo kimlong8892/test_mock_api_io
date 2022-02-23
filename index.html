@@ -19,10 +19,22 @@
         th, td {
             padding: 15px;
         }
+
+        .buttons button, .buttons input {
+            margin: 7px;
+        }
     </style>
 </head>
 <body>
-    <button id="btn-show-data">Btn i love uuuuu</button>
+    <div class="buttons">
+        <button id="btn-show-data">Btn i love uuuuu</button>
+
+        <div>
+            <input type="text" id="name" placeholder="name..." required><br>
+            <input type="number" id="price" placeholder="price..." required><br>
+            <button id="btn-add-data">Btn add</button>
+        </div>
+    </div>
 
     <div>
         <img src="https://i.stack.imgur.com/ATB3o.gif" id="img-loading">
@@ -36,16 +48,17 @@
 
     <script>
         $(document).ready(function (){
+            var url_api = 'https://6214fc29cdb9d09717a8e710.mockapi.io/api/test/';
             $('#product-table').hide();
             $('#img-loading').hide();
 
-            $('#btn-show-data').click(function (){
-                $('#product-table').hide();
 
+            $('body').on('click', '#btn-show-data', function (){
+                $('#product-table').hide();
                 $('#img-loading').show();
 
                 $.ajax({
-                    url: 'https://6214fc29cdb9d09717a8e710.mockapi.io/api/test/products',
+                    url: url_api + 'products',
                     method: 'GET',
                     success: function (data) {
                         $('#product-table').show();
@@ -59,6 +72,20 @@
                             html_append += `</tr>`;
                         });
                         $('#product-table').html(html_append);
+                    }
+                });
+            });
+
+            $('body').on('click', '#btn-add-data', function (){
+                $.ajax({
+                    url: url_api + '/products',
+                    method: 'POST',
+                    data: {
+                        name: $('#name').val(),
+                        price: $('#price').val()
+                    },
+                    success: function () {
+                        $('#btn-show-data').click();
                     }
                 });
             });
